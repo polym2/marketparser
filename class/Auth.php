@@ -9,7 +9,7 @@
         public function __construct($auth_key){
             $this->auth_key = $auth_key;
             
-        }
+        } 
 
     }
 ?>

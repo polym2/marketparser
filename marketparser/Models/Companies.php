@@ -12,11 +12,13 @@
             
             $companies = new Curl();
             
-            return $companies->get($this->url, [
+            return  $companies->get($this->url, [
             
                 'Method' => 'GET',
                 
             ]);
+            
+            
         }
     }
 ?>

@@ -68,7 +68,7 @@
                     print_r (curl_error($ch));
                     
                 } else {
-                    return (json_decode($data));
+                    return (json_decode($data, true));
                 }
                 
         curl_close($ch);

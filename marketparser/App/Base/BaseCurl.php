@@ -10,16 +10,14 @@
 
         public static function curl_base($url, $params = [], $data = NULL)
         {
+           $auth_obj = new Auth();
+           $auth_key = $auth_obj->auth_key();
+           
             $base_options = [
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_SSL_VERIFYPEER => true,
                 CURLOPT_SSL_VERIFYHOST => 2
             ];
-        
-                 if (isset($params['KeyAPI'])){
-                        
-                        $auth_key = $params['KeyAPI'];
-                    }
                 
                 $headers = [
                     'Api-Key: ' . $auth_key,
@@ -59,7 +57,7 @@
                 
                 // print_r ($options);
                 
-                $ch = curl_init();
+        $ch = curl_init();
                 
                 curl_setopt_array($ch, $options);
                 
@@ -68,11 +66,13 @@
                 if (curl_error($ch) == true)
                 {
                     print_r (curl_error($ch));
+                    
                 } else {
-                    print_r (json_decode($data));
+                    return (json_decode($data));
                 }
                 
-                curl_close($ch);
+        curl_close($ch);
+        
         }
     }
 ?>

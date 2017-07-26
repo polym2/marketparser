@@ -8,20 +8,19 @@
     class Curl extends BaseCurl
    
     {
-        
-        public function set_headers($auth_key)
+        public function __construct()
         {
-            $this->headers = 'Api-Key: ' . $auth_key . ',' . 'Content-Type: application/json';
+            return $this;
         }
-        
+
         public function post($url, $params = [], $data)
         {
-            BaseCurl::curl_base($url, $params, $data);
+            return BaseCurl::curl_base($url, $params, $data);
         }
         
         public function get($url, $params = [])
         {
-            BaseCurl::curl_base($url, $params);
+            return BaseCurl::curl_base($url, $params);
         }
         
     }

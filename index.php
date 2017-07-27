@@ -29,9 +29,10 @@
         'KeyApi' => 'ZGQ3NDYxNTBjZDRiMTAzM2YyODc0NTczZTZkYzMxMjRkMGIyOWJjZA'
     ]));
     */
-    print_r (Companies::GetAllCompanies([
+    $comp = new Companies();
+    echo $comp->GetAllCompanies([
         'KeyApi' => 'ZGQ3NDYxNTBjZDRiMTAzM2YyODc0NTczZTZkYzMxMjRkMGIyOWJjZA'
-    ]));
+    ])->GetTotal();
 
     
 ?>

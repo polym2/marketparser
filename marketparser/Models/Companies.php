@@ -5,8 +5,13 @@
     use marketparser\App\Config as Config;
     class Companies
     {
+        public $response;
         
-        public static function GetAllCompanies($params = NULL)
+        public function __construct(){
+            return $this;
+        }
+        
+        public function GetAllCompanies($params = NULL)
         {   
             if (isset($params['URL'])){
                 
@@ -42,13 +47,14 @@
             ];
             
             //print_r ($params);
-            return Curl::get($params);
+            $this->companies = Curl::get($params)['response'];
             
+            return $this;
         }
         
         public function GetTotal()
         {
-             
+             return $this->companies['total'];
         }
     }
 ?>

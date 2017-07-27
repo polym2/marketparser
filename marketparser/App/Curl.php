@@ -8,19 +8,15 @@
     class Curl extends BaseCurl
    
     {
-        public function __construct()
-        {
-            return $this;
-        }
 
-        public function post($url, $params = [], $data)
+        public static function post($url, $params = [], $data)
         {
             return BaseCurl::curl_base($url, $params, $data);
         }
         
-        public function get($url, $params = [])
+        public static function get($params = [])
         {
-            return BaseCurl::curl_base($url, $params);
+            return BaseCurl::curl_base($params);
         }
         
     }

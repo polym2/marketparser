@@ -1,32 +1,42 @@
 <?php
 	namespace marketparser\App\Base;
     
-    use marketparser\models\Auth;
+    use marketparser\App\Config;
     
-    require_once('marketparser/Models/Auth.php');
+    require_once('marketparser/App/Config.php');
     
     class BaseCurl
     {
 
-        public static function curl_base($url, $params = [], $data = NULL)
+        public static function curl_base($params = NULL, $data = NULL)
         {
-           $auth_obj = new Auth();
-           $auth_key = $auth_obj->auth_key();
-           
+           //print_r ($params);
             $base_options = [
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_SSL_VERIFYPEER => true,
                 CURLOPT_SSL_VERIFYHOST => 2
             ];
-                
-                $headers = [
-                    'Api-Key: ' . $auth_key,
-                    'Content-Type: application/json',
-                ];
-                
-                if (isset($params['Method'])){
+
+                if ($params != NULL){
+
+                    $url = $params['URL'];
                     
-                    if ($params['Method'] == 'GET'){
+                    $headers = [
+                                'Api-Key: ' . $params['KeyApi'],
+                                'Content-Type: application/json',
+                                ];
+                    
+                    if (isset($params['per_page'])){
+                        
+                        $url .= '?per_page'.$params['per_page'];
+                    }
+                    
+                    if (isset($params['page'])){
+                        
+                        $url .= '?page'.$params['page'];
+                    }
+                            
+                    if (isset($params['Method']) AND strtoupper($params['Method']) == 'GET'){
                         
                         $options = $base_options + [
                             CURLOPT_URL => $url,
@@ -36,7 +46,7 @@
                         
                     }
                     
-                    if ($params['Method'] == 'POST' AND $data != NULL){
+                    if (isset($params['Method']) AND strtoupper($params['Method']) == 'POST' AND $data != NULL){
                         
                         $options = $base_options + [
                             CURLOPT_URL => $url, 
@@ -47,15 +57,8 @@
                         ];
                         
                     }
-                }
-                if (isset($params['per_page'])){
-                    $url .= '?per_page'.$params['per_page'];
-                }
-                if (isset($params['page'])){
-                    $url .= '?page'.$params['page'];
-                }
-                
-                // print_r ($options);
+                    
+        //print_r ($options);
                 
         $ch = curl_init();
                 
@@ -68,11 +71,13 @@
                     print_r (curl_error($ch));
                     
                 } else {
+                    
                     return (json_decode($data, true));
                 }
                 
         curl_close($ch);
         
+            }
         }
     }
 ?>

@@ -3,15 +3,13 @@
     
     use marketparser\App\Curl as Curl;
     use marketparser\App\Config as Config;
+    
+    require_once('marketparser/Models/CompaniesResult.php');
+    
     class Companies
     {
-        public $response;
         
-        public function __construct(){
-            return $this;
-        }
-        
-        public function GetAllCompanies($params = NULL)
+        public static function GetAllCompanies($params = NULL)
         {   
             if (isset($params['URL'])){
                 
@@ -47,14 +45,10 @@
             ];
             
             //print_r ($params);
-            $this->companies = Curl::get($params)['response'];
+            $response = Curl::get($params)['response'];
             
-            return $this;
+            return new CompaniesResult($response);
         }
         
-        public function GetTotal()
-        {
-             return $this->companies['total'];
-        }
     }
 ?>

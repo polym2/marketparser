@@ -1,10 +1,6 @@
 <?php
 	namespace marketparser\App\Base;
     
-    use marketparser\App\Config;
-    
-    require_once('marketparser/App/Config.php');
-    
     class BaseCurl
     {
 

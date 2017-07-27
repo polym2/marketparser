@@ -9,7 +9,7 @@
     class Companies
     {
         
-        public static function GetAllCompanies($params = NULL)
+        public static function GetCompanies($params = NULL)
         {   
             if (isset($params['URL'])){
                 

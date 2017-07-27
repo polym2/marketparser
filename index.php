@@ -7,6 +7,7 @@
     require_once('marketparser/App/Base/BaseCurl.php');
     require_once('marketparser/Models/Companies.php');
     
+    
     //use marketparser\App;
     use marketparser\App\Curl;
     use marketparser\App\Config;
@@ -29,9 +30,8 @@
         'KeyApi' => 'ZGQ3NDYxNTBjZDRiMTAzM2YyODc0NTczZTZkYzMxMjRkMGIyOWJjZA'
     ]));
     */
-    echo Companies::GetAllCompanies([
+    print_r(Companies::GetCompanies([
         'KeyApi' => 'ZGQ3NDYxNTBjZDRiMTAzM2YyODc0NTczZTZkYzMxMjRkMGIyOWJjZA'
-    ])->GetTotal();
-
+    ])->All()); // ->Total(), ->Ids()
     
 ?>

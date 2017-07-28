@@ -9,9 +9,9 @@
    
     {
 
-        public static function post($params = [], $data)
+        public static function post($params = [], $data = NULL)
         {
-            print_r ($params);
+            //print_r ($params);
             return BaseCurl::curl_base($params, $data);
         }
         

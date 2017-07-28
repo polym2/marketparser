@@ -72,5 +72,23 @@
             }
         }
         
+        public function IsCompany($id)
+        {
+            if (count($this->response['campaigns']) > 0){
+                
+                foreach ($this->response['campaigns'] as $val){
+                    
+                    if ($val['id'] == $id) {
+                        
+                        return true;
+                        
+                    } 
+                }
+                
+                return false;
+
+            }
+        }
+        
     }
 ?>

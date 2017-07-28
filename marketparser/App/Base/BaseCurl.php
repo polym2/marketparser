@@ -6,7 +6,7 @@
 
         public static function curl_base($params = NULL, $data = NULL)
         {
-           //print_r ($params);
+
             $base_options = [
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_SSL_VERIFYPEER => true,
@@ -24,12 +24,12 @@
                     
                     if (isset($params['per_page'])){
                         
-                        $url .= '?per_page'.$params['per_page'];
+                        $url .= '?per_page='.$params['per_page'];
                     }
                     
                     if (isset($params['page'])){
                         
-                        $url .= '?page'.$params['page'];
+                        $url .= '?page='.$params['page'];
                     }
                             
                     if (isset($params['Method']) AND strtoupper($params['Method']) == 'GET'){
@@ -37,23 +37,27 @@
                         $options = $base_options + [
                             CURLOPT_URL => $url,
                             CURLOPT_HTTPHEADER => $headers,
-                            CURLOPT_CAINFO => getcwd() . "\cacert.pem"
+                            CURLOPT_CAINFO => getcwd() . "\cacert.pem",
                         ];
                         
                     }
                     
-                    if (isset($params['Method']) AND strtoupper($params['Method']) == 'POST' AND $data != NULL){
+                    if (isset($params['Method']) AND strtoupper($params['Method']) == 'POST'){
                         
                         $options = $base_options + [
                             CURLOPT_URL => $url, 
                             CURLOPT_HTTPHEADER => $headers,
-                            CURLOPT_POSTFIELDS => json_encode($data), 
                             CURLOPT_POST => true,
-                            CURLOPT_CAINFO => getcwd() . "\cacert.pem"
+                            CURLOPT_CAINFO => getcwd() . "\cacert.pem",
                         ];
                         
                     }
-                    
+                    if($data !== NULL){
+                        
+                        $options += [CURLOPT_POSTFIELDS => json_encode($data)];
+                        
+                    }
+        //print_r ($params);           
         //print_r ($options);
                 
         $ch = curl_init();

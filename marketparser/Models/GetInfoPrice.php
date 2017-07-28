@@ -1,39 +1,37 @@
 <?php
 	namespace marketparser\Models;
-    
+        
     use marketparser\App\Curl as Curl;
     use marketparser\App\Config as Config;
     use marketparser\App\Exception\Exception as Exception;
     
     require_once('marketparser/App/Exception/Exception.php');
-    require_once('marketparser/Models/CompaniesResult.php');
+    require_once('marketparser/Models/GetInfoPriceResult.php');
     
-    class PriceCompany
+    class GetInfoPrice
     {
-        public static function SetPrice($params = NULL, $data)
-        {   
+        public static function PriceInfo($params)
+        {
             if (isset($params['CompanyId'])){
                 
-                $CompanyID = $params['CompanyId'];
+                    $CompanyID = $params['CompanyId'];
                 
                 if (isset($params['URL'])){
-                
-                $url = $params['URL'];
-                
+                    
+                    $url = $params['URL'];
+                    
                 } else {
                     
                     $url = "https://cp.marketparser.ru/api/v2/campaigns/$CompanyID/price.json";
                 }
-            
-            
-            
+                
                 if (isset($params['Method'])){
                     
                     $Method = $params['Method'];
                     
                 } else {
                     
-                    $Method = 'POST';
+                    $Method = 'GET';
                 }
                 
                 if (isset($params['KeyApi'])){
@@ -44,23 +42,23 @@
                     
                     $KeyApi = Config::GetAuthKey();
                 }
-                
-                
+              
                 $params = [
                     'URL' => $url,
                     'Method' => $Method,
-                    'KeyApi' => $KeyApi,
-                    'Data' => $data
+                    'KeyApi' => $KeyApi
                 ];
-                            //print_r ($params);
-                return Curl::post($params, $data);
+                
+                //print_r ($params);
+                $response = Curl::get($params)['response'];
+                
+                return new GetInfoPriceResult($response);
             
             } else {
                 
-                Exception::CatchException('no_comp_id');
- 
+                Exception::CatchException('no_company_id_GetInfoPrice');
+                
             }
- 
         }
     }
 ?>

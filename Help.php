@@ -49,7 +49,7 @@
         Companies::GetAllCompanies([
             'KeyApi' => 'ZGQ3NDYxNTBjZDRiMTAzM2YyODc0NTczZTZkYzMxMjRkMGIyOWJjZA'
         ]);
-        Companies::GetAllCompanies();
+        Companies::GetCompanies();
     // --- END получение списка компаний с служебными полями (Total)
      
     // --- получение списка компаний без служедных полей (Total) - массив массивов
@@ -206,31 +206,31 @@
             'per_page' => 100
         ])->Products();
         
-    // Получение отчёта по товару по вашему ID
+    // Получение отчёта по товару по вашему ID товара
         print_r(Report::Get([
             'CompanyId' => Companies::GetCompanies()->GetIdByName('test2'),
             'ReportId' => 70415
         ])->ById('id14'));
     
-    // Получение максимальной чены товара по вашему ID - строка
+    // Получение максимальной цены товара по вашему ID товара - строка
         Report::Get([
             'CompanyId' => Companies::GetCompanies()->GetIdByName('test2'),
             'ReportId' => 70415
         ])->MaxPrice('id14');
         
-    // Получение минимальной цены товара по вашему ID - строка
+    // Получение минимальной цены товара по вашему ID товара - строка
         Report::Get([
             'CompanyId' => Companies::GetCompanies()->GetIdByName('test2'),
             'ReportId' => 70415
         ])->MinPrice('id14');
         
-    // Получение средней цены товара по вашему ID
+    // Получение средней цены товара по вашему ID товара - строка
         Report::Get([
             'CompanyId' => Companies::GetCompanies()->GetIdByName('test2'),
             'ReportId' => 70415
         ])->AveragePrice('id14');
         
-    // Получение кол-ва магазинов - строка
+    // Получение кол-ва магазинов продающий такойже товар, как товар с вашим ID  - строка
         Report::Get([
             'CompanyId' => Companies::GetCompanies()->GetIdByName('test2'),
             'ReportId' => 70415
@@ -305,5 +305,7 @@
         
     // --- END ПОДПИСКА НА ПЛАН
     */
-    
+    print_r (Companies::GetCompanies([
+            'KeyApi' => 'ZGQ3NDYxNTBjZDRiMTAzM2YyODc0NTczZTZkYzMxMjRkMGIyOWJjZA'
+        ])->All());
 ?>

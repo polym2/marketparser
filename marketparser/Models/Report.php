@@ -96,7 +96,11 @@
             
             $response = Curl::get($params_all)['response'];
             
-            return new ReportResult($response);
+            if ($response){
+                
+                return new ReportResult($response);
+            
+            }
         
         }
     } 

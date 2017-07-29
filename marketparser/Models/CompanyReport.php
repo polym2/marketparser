@@ -76,7 +76,11 @@
                                 //print_r ($params);
                     $response = Curl::post($params)['response'];
                     
-                    return new CompanyReportResult($response);
+                    if ($response){
+                        
+                        return new CompanyReportResult($response);
+                    
+                    }
         }
     }
 ?>

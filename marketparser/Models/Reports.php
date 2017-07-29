@@ -71,8 +71,11 @@
             
             $response = Curl::get($params_all)['response'];
             
-            return new ReportsResult($response);
+            if ($response){
+                
+                return new ReportsResult($response);
+                
+            }
         }
-
     }
 ?>

@@ -47,7 +47,12 @@
             //print_r ($params);
             $response = Curl::get($params)['response'];
             
-            return new CompaniesResult($response);
+            if ($response){
+                
+                return new CompaniesResult($response);
+                
+            }
+            
         }
         
     }

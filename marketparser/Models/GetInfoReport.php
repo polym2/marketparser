@@ -76,7 +76,11 @@
             //print_r ($params);
             $response = Curl::get($params)['response'];
             
-            return new GetInfoReportResult($response);
+            if ($response){
+                
+                return new GetInfoReportResult($response);
+            
+            }
         }
     }
 ?>

@@ -22,6 +22,8 @@
                 if ($code == 'no_report_id_GetReport') echo "<br>Не передан обязательный параметр ReportId при получении отчёта";
                 if ($code == 'no_matches_our_id') echo "<br>Не найдено переданного ourID товара при получении отчёта товара";
                 if ($code == 'no_FINISHED') echo "<br>Запрашиваемый отчёт не готов";
+                if ($code == 'no_pem_file') echo "<br>Нет *.pem файла" . getcwd() . '\cacert.pem';
+                if ($code == 'no_readable_catalog') echo "<br>Установите права на запись для каталога " . getcwd() . '/marketparser/Config';
                 
             } else {
                 echo '<br>Неверный вызов обработчика ошибок';

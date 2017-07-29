@@ -11,9 +11,16 @@
         {
             
             $path_config = getcwd() . '/marketparser/Config/config.php';
-                
+            $path_catalog = getcwd() . '/marketparser/Config';
+            
                 if (!file_exists($path_config)){
                     
+                    if (!is_readable($path_catalog)){
+                        
+                        Exception::CatchException('no_readable_catalog');
+                        
+                        return false;
+                    }
                     $config = [ 'KeyAPI' => $auth_key , 
                                 'PathConfig' => $path_config
                               ];

@@ -47,7 +47,11 @@
             //print_r ($params);
             $response = Curl::get($params)['response'];
             
-            return new PlanResult($response);
+            if ($response){
+                
+                return new PlanResult($response);
+            
+            }
         }
     }
 ?>

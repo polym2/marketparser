@@ -52,7 +52,11 @@
                 //print_r ($params);
                 $response = Curl::get($params)['response'];
                 
-                return new GetInfoPriceResult($response);
+                if ($response){
+                    
+                    return new GetInfoPriceResult($response);
+                
+                }
             
             } else {
                 

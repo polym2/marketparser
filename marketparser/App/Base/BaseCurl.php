@@ -1,18 +1,30 @@
 <?php
 	namespace marketparser\App\Base;
     
+    use marketparser\App\Exception\Exception as Exception;
+    
+    require_once('marketparser/App/Exception/Exception.php');
+    
     class BaseCurl
     {
 
         public static function curl_base($params = NULL, $data = NULL)
         {
 
-            $base_options = [
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_SSL_VERIFYPEER => true,
-                CURLOPT_SSL_VERIFYHOST => 2
-            ];
-
+           
+                if(!file_exists(getcwd() . '\cacert.pem') OR !is_file(getcwd() . '\cacert.pem')){
+                    
+                    Exception::CatchException('no_pem_file');
+                    
+                    return false;
+                }
+                
+                 $base_options = [
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_SSL_VERIFYPEER => true,
+                    CURLOPT_SSL_VERIFYHOST => 2
+                ];
+                
                 if ($params != NULL){
 
                     $url = $params['URL'];
